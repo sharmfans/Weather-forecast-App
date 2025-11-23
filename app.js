@@ -1,9 +1,12 @@
-const API_KEY = "81413a7aa85c66dec514fc8af639bd9a "; 
+const API_KEY = "e5b5226e6bb84ebfd5a6782489e623fc ";
 
 document.getElementById('weather-form').addEventListener('submit', async function(e){
     e.preventDefault();
     const city = document.getElementById('city-input').value.trim();
-    if (!city) return;
+    if (!city) {
+        showError('Please enter a city or town name.');
+        return;
+    }
     showLoading();
 
     try {
@@ -14,13 +17,19 @@ document.getElementById('weather-form').addEventListener('submit', async functio
         const forecastData = await forecast.json();
 
         if (currentData.cod !== 200) {
-            showError('City not found. Please enter a valid city.');
+            if (currentData.cod === "401") {
+                showError('Invalid API key. Please check your API key and update app.js.');
+            } else if (currentData.cod === "404") {
+                showError('City or town not found. Please check your spelling and try again.');
+            } else {
+                showError(`Error: ${currentData.message}`);
+            }
             return;
         }
 
         renderWeather(currentData, forecastData);
     } catch (err) {
-        showError('Failed to fetch weather data.');
+        showError('Failed to fetch weather data. Please check your internet connection or try again later.');
     }
 });
 
@@ -29,7 +38,7 @@ function showLoading() {
 }
 
 function showError(msg) {
-    document.getElementById("weather-result").innerHTML = `<p class="error">${msg}</p>`;
+    document.getElementById("weather-result").innerHTML = `<p class="error" style="color:red;">${msg}</p>`;
 }
 
 function renderWeather(current, forecast) {
@@ -42,7 +51,7 @@ function renderWeather(current, forecast) {
         <ul>
     `;
 
-    // Show next 5 forecasts (every ~3h)
+    // Show next 5 forecasts
     let nextForecasts = forecast.list.slice(0, 5);
     for (let f of nextForecasts) {
         html += `
