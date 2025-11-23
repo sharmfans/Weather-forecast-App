@@ -1,1 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #eef4fa;
+    margin: 0;
+    padding: 0;
+}
 
+.app-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 2em;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    gap: 8px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 0.5em;
+    font-size: 16px;
+}
+
+button {
+    padding: 0.5em 1em;
+    font-size: 16px;
+    background: #379dfc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #156aca;
+}
+
+#weather-result {
+    margin-top: 2em;
+}
