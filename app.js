@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // <-- Replace with your actual OpenWeatherMap API key
+const API_KEY = "81413a7aa85c66dec514fc8af639bd9a "; 
 
 document.getElementById('weather-form').addEventListener('submit', async function(e){
     e.preventDefault();
